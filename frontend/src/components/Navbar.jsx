@@ -1,0 +1,558 @@
+import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { searchProducts } from '../services/api';
+import { api } from '../utils/api';
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const searchWrapRefMobile = useRef(null);
+  const searchWrapRefDesktop = useRef(null);
+  const navigate = useNavigate();
+  const { cartCount } = useCart();
+  const [wishlistCount, setWishlistCount] = useState(0);
+  const [navbarLogo, setNavbarLogo] = useState('https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768217365/Black_White_Minimal_Initial_G_Letter_Logo_Design_dxdto9.png');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const readWishlistCount = () => {
+      try {
+        const raw = localStorage.getItem('wishlist');
+        const list = raw ? JSON.parse(raw) : [];
+        setWishlistCount(Array.isArray(list) ? list.length : 0);
+      } catch {
+        setWishlistCount(0);
+      }
+    };
+    readWishlistCount();
+    const onStorage = (e) => {
+      if (!e || e.key === 'wishlist') readWishlistCount();
+    };
+    const onCustom = () => readWishlistCount();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('wishlist:updated', onCustom);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('wishlist:updated', onCustom);
+    };
+  }, []);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      try {
+        const token = localStorage.getItem('auth_token');
+        setIsAuthenticated(Boolean(token));
+      } catch {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuth();
+    const onStorage = (e) => {
+      if (!e || e.key === 'auth_token') {
+        checkAuth();
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  useEffect(() => {
+    const loadLogo = async () => {
+      try {
+        const data = await api.getLogo();
+        if (data.navbarLogo) {
+          setNavbarLogo(data.navbarLogo);
+        }
+      } catch (err) {
+        console.error('Failed to load navbar logo:', err);
+        // Keep default logo on error
+      }
+    };
+    loadLogo();
+  }, []);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('auth_token');
+    } catch {}
+    setIsAuthenticated(false);
+    navigate('/signin');
+  };
+
+  const handleLogin = () => {
+    navigate('/signin');
+  };
+
+  const handleSearch = () => {
+    const q = searchQuery.trim();
+    if (!q) return;
+    setSearchOpen(false);
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+  };
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearch();
+    }
+    if (e.key === 'Escape') {
+      setSearchOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (q.length < 2) {
+      setSearchResults([]);
+      setSearchLoading(false);
+      setSearchOpen(false);
+      return;
+    }
+    setSearchLoading(true);
+    setSearchOpen(true);
+    const t = setTimeout(async () => {
+      try {
+        const data = await searchProducts(q);
+        const items = data?.results || [];
+        setSearchResults(items);
+      } catch (err) {
+        setSearchResults([]);
+      } finally {
+        setSearchLoading(false);
+      }
+    }, 250);
+    return () => clearTimeout(t);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const onClick = (e) => {
+      const inMobile = searchWrapRefMobile.current && searchWrapRefMobile.current.contains(e.target);
+      const inDesktop = searchWrapRefDesktop.current && searchWrapRefDesktop.current.contains(e.target);
+      if (!inMobile && !inDesktop) setSearchOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (isMobileMenuOpen && !e.target.closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    if (isMobileMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isMobileMenuOpen]);
+
+  // Policy pages for mobile menu
+  const policyLinks = [
+    { name: 'Privacy Policy', path: '/privacy' },
+    { name: 'Terms of Service', path: '/terms' },
+    { name: 'Shipping Policy', path: '/shipping' },
+    { name: 'Return Policy', path: '/returns' },
+  ];
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <nav className="relative z-[70] bg-white border-b border-gray-200 border-t-0">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 gap-4">
+          {/* Logo/Brand - Left */}
+          <Link to="/" className="flex-shrink-0 z-10 flex items-center">
+            <img 
+              src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768217365/Black_White_Minimal_Initial_G_Letter_Logo_Design_dxdto9.png"
+              alt="MARTVILL Logo"
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
+
+          {/* Desktop Navigation Links - Center */}
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-center">
+            <Link
+              to="/"
+              onClick={scrollToTop}
+              className="text-gray-900 hover:text-black transition-colors duration-200 text-sm xl:text-base uppercase tracking-wide whitespace-nowrap px-1 py-2 flex items-center gap-1"
+            >
+              Home
+            </Link>
+            <Link
+              to="/shop"
+              onClick={scrollToTop}
+              className="text-gray-900 hover:text-black transition-colors duration-200 text-sm xl:text-base uppercase tracking-wide whitespace-nowrap px-1 py-2 flex items-center gap-1"
+            >
+              Shop
+            </Link>
+            
+            {/* Categories Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsCategoriesOpen(true)}
+              onMouseLeave={() => setIsCategoriesOpen(false)}
+            >
+              <button
+                className="text-gray-900 hover:text-black transition-colors duration-200 text-sm xl:text-base uppercase tracking-wide whitespace-nowrap px-1 py-2 flex items-center gap-1"
+              >
+                Categories
+                <svg className={`w-4 h-4 transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* Dropdown Menu */}
+              {isCategoriesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-0 pt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-xl z-50 pb-3"
+                >
+                  <div className="grid grid-cols-4 gap-0">
+                    <Link
+                      to="/category/formal-shirts"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      SHIRTS
+                    </Link>
+                    <Link
+                      to="/category/tshirts"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      TSHIRTS
+                    </Link>
+                    <Link
+                      to="/category/pants"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      PANTS
+                    </Link>
+                    <Link
+                      to="/category/shorts"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      SHORTS
+                    </Link>
+                    <Link
+                      to="/category/shoes"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      Shoes
+                    </Link>
+                    <Link
+                      to="/category/sunglasses"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      Sunglasses
+                    </Link>
+                    <Link
+                      to="/category/watches"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      WATCHES
+                    </Link>
+                    <Link
+                      to="/category/perfumes"
+                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                    >
+                      PERFUMES
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            <Link
+              to="/collection"
+              onClick={scrollToTop}
+              className="text-gray-900 hover:text-black transition-colors duration-200 text-sm xl:text-base uppercase tracking-wide whitespace-nowrap px-1 py-2 flex items-center gap-1"
+            >
+              Collection
+            </Link>
+          </div>
+
+          {/* Search Bar - Center (Desktop) */}
+          <div className="hidden lg:flex items-center relative flex-1 max-w-md mx-4" ref={searchWrapRefDesktop}>
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Type your product name.."
+              value={searchQuery}
+              onChange={(e) => { const v = e.target.value; setSearchQuery(v); setSearchOpen(v.trim().length >= 2); }}
+              onKeyPress={handleSearchKeyPress}
+              onFocus={() => { if (searchQuery.trim().length >= 2) setSearchOpen(true); }}
+              className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 text-gray-900 placeholder-gray-400"
+            />
+            {searchOpen && (
+              <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 lg:w-96 bg-white border border-gray-200 rounded-lg shadow-xl z-[80] p-3 sm:p-4">
+                  {searchLoading && (
+                    <div className="px-4 py-3 text-sm text-gray-500">Searching…</div>
+                  )}
+                  {!searchLoading && searchQuery.trim() && searchResults.length === 0 && (
+                    <div className="px-4 py-3 text-sm text-gray-500">No products found</div>
+                  )}
+                  {!searchLoading && searchResults.length > 0 && (
+                    <ul className="max-h-80 overflow-auto divide-y divide-gray-100 mt-2">
+                      {searchResults.slice(0, 8).map((p) => (
+                        <li key={p._id || p.id || p.slug}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSearchOpen(false);
+                              navigate(`/product/${p._id || p.id || ''}`);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left"
+                          >
+                            <img
+                              src={p.images?.image1 || p.image || 'https://via.placeholder.com/60x80?text=No+Image'}
+                              alt={p.title || p.name || 'Product'}
+                              className="w-12 h-16 object-cover rounded-md border border-gray-100"
+                              onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/60x80?text=No+Image'; }}
+                            />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium text-gray-900 truncate">{p.title || p.name || 'Product'}</p>
+                              {p.price && (
+                                <p className="text-xs text-gray-600">₹{Number(p.price).toLocaleString()}</p>
+                              )}
+                            </div>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Search - Responsive */}
+            <div className="lg:hidden relative flex-1 max-w-[200px] sm:max-w-[250px] mx-2" ref={searchWrapRefMobile}>
+              <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Type your product name.."
+                value={searchQuery}
+                onChange={(e) => { const v = e.target.value; setSearchQuery(v); setSearchOpen(v.trim().length >= 2); }}
+                onKeyPress={handleSearchKeyPress}
+                onFocus={() => { if (searchQuery.trim().length >= 2) setSearchOpen(true); }}
+                className="w-full pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-md text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 text-gray-900 placeholder-gray-400"
+              />
+              {searchOpen && (
+                <div className="absolute left-0 right-0 top-full mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-xl z-[80] p-3 sm:p-4">
+                  {searchLoading && (
+                    <div className="px-4 py-3 text-sm text-gray-500">Searching…</div>
+                  )}
+                  {!searchLoading && searchQuery.trim() && searchResults.length === 0 && (
+                    <div className="px-4 py-3 text-sm text-gray-500">No products found</div>
+                  )}
+                  {!searchLoading && searchResults.length > 0 && (
+                    <ul className="max-h-80 overflow-auto divide-y divide-gray-100 mt-2">
+                      {searchResults.slice(0, 8).map((p) => (
+                        <li key={p._id || p.id || p.slug}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSearchOpen(false);
+                              navigate(`/product/${p._id || p.id || ''}`);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-left"
+                          >
+                            <img
+                              src={p.images?.image1 || p.image || 'https://via.placeholder.com/60x80?text=No+Image'}
+                              alt={p.title || p.name || 'Product'}
+                              className="w-12 h-16 object-cover rounded-md border border-gray-100"
+                              onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/60x80?text=No+Image'; }}
+                            />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium text-gray-900 truncate">{p.title || p.name || 'Product'}</p>
+                              {p.price && (
+                                <p className="text-xs text-gray-600">₹{Number(p.price).toLocaleString()}</p>
+                              )}
+                            </div>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </div>
+
+          {/* Right Side Icons with Labels */}
+          <div className="flex items-center space-x-4 flex-shrink-0">
+            {/* Account */}
+            <div className="hidden lg:flex flex-col items-center">
+              {isAuthenticated ? (
+                <Link to="/profile" className="flex flex-col items-center">
+                  <svg className="w-5 h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span className="text-gray-700 text-xs">Account</span>
+                </Link>
+              ) : (
+                <button onClick={handleLogin} className="flex flex-col items-center">
+                  <svg className="w-5 h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span className="text-gray-700 text-xs">Account</span>
+                </button>
+              )}
+            </div>
+
+            {/* Wishlist */}
+            <Link to="/wishlist" className="hidden lg:flex flex-col items-center relative">
+              <svg className="w-5 h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              <span className="text-gray-700 text-xs">Wishlist</span>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-medium">
+                  {wishlistCount > 9 ? '9+' : wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cart" className="hidden lg:flex flex-col items-center relative">
+              <svg className="w-5 h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span className="text-gray-700 text-xs">Your Cart</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-medium">
+                  {cartCount > 9 ? '9+' : cartCount}
+                </span>
+              )}
+            </Link>
+
+            {/* My Orders */}
+            <Link to="/track-order" className="hidden lg:flex flex-col items-center">
+              <svg className="w-5 h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-gray-700 text-xs">My Orders</span>
+            </Link>
+
+            {/* Mobile menu button */}
+            <div className="flex items-center lg:hidden ml-0.5 sm:ml-1">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="inline-flex items-center justify-center p-1.5 sm:p-2 rounded-md text-gray-700 hover:text-black hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all"
+                aria-expanded={isMobileMenuOpen}
+                aria-label="Toggle menu"
+              >
+                <span className="sr-only">Open main menu</span>
+                {isMobileMenuOpen ? (
+                  <svg className="block h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="block h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div 
+            id="mobile-menu" 
+            className="lg:hidden py-4 sm:py-6 border-t border-gray-200 bg-white animate-in slide-in-from-top duration-200"
+          >
+            <nav className="flex flex-col gap-2 px-2">
+              {policyLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    scrollToTop();
+                  }}
+                  className="text-gray-700 hover:text-black hover:bg-gray-50 py-2 sm:py-2.5 px-3 sm:px-4 rounded transition-colors text-xs sm:text-sm"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+            {isAuthenticated ? (
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200 px-2">
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full py-2.5 sm:py-3 px-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200 px-2">
+                <button
+                  onClick={() => {
+                    handleLogin();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full py-2.5 sm:py-3 px-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
+                >
+                  Sign In
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
