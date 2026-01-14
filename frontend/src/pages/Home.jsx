@@ -184,10 +184,10 @@ const Home = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Fashion</h2>
             <p className="text-gray-600">Trendy styles for every occasion</p>
           </div>
-          <FeaturedProducts category="tshirts" layout="grid" /> 
+          <FeaturedProducts category="oversized" layout="grid" /> 
           <div className="flex justify-center mt-10">
             <Link
-              to="/category/tshirts"
+              to="/category/oversized"
               className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-10 py-4 rounded-md font-semibold text-sm md:text-base uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
             >
               Shop Now →

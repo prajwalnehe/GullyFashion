@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { FaHeart, FaRegHeart, FaStar, FaChevronLeft, FaChevronRight, FaSpinner, FaShoppingCart, FaFire } from 'react-icons/fa'; 
 import { fetchSarees } from '../services/api';
 import { getCachedProducts, setCachedProducts } from '../utils/cache';
+import { useCart } from '../context/CartContext';
 
 const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts = 8 }) => {
   const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts 
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
   const isGridLayout = layout === 'grid';
+  const { addToCart } = useCart();
 
   // Get cache key for this category
   const getCacheKey = () => {
@@ -287,9 +289,17 @@ const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts 
                   
                   {/* Shopping Cart Icon (Bottom Right) */}
                   <button
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.stopPropagation();
-                      // Add to cart functionality can be added here
+                      const productId = product._id || product.id;
+                      if (productId) {
+                        try {
+                          await addToCart(productId, 1, null);
+                          // Optional: Show a success message or notification
+                        } catch (error) {
+                          console.error('Error adding to cart:', error);
+                        }
+                      }
                     }}
                     className="absolute bottom-2 right-2 bg-black text-white rounded-full p-2 shadow-md hover:bg-gray-800 transition-all z-10"
                   >
