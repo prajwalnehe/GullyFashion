@@ -5,51 +5,51 @@ const Collection = () => {
   const categories = [
     {
       id: 1,
-      name: "SHIRTS",
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270065/f41cb7e3-f91a-4dc1-8738-35f610929e62.png',
-      path: '/category/formal-shirts'
+      name: "Crew Neck",
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768376336/4e7aba40995ac5e9dc35daaf26b76220_lq6uip.jpg',
+      path: '/category/crew-neck'
     },
     {
       id: 2,
-      name: "TSHIRTS",
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270201/2bc21bba-d836-46f0-81a0-6e045d2b07fd.png',
-      path: '/category/tshirts'
+      name: "V Neck",
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768376888/15cca942-1f95-4406-bf62-d20c5dda6114.png',
+      path: '/category/v-neck'
     },
     {
       id: 3,
-      name: 'PERFUMES',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270303/8ebb88f6-a40e-48a5-a1f3-6b98f254c666.png',
-      path: '/category/perfumes'
+      name: 'Polo',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377096/ed2ff93a-e0ee-4de3-aae3-03d0e5212693.png',
+      path: '/category/polo'
     },
     {
       id: 4,
-      name: 'Shoes',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765356722/c8ebeacb5152e0d91ea0158bc3d94f8b_uaalsc.jpg',
-      path: '/category/shoes'
+      name: 'Henley',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377277/822a1b4b1a5863b8d99a91bed9f67a38_qsgsdz.jpg',
+      path: '/category/henley'
     },
     {
       id: 5,
-      name: 'PANTS',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270378/ce7c75f8-2069-4b99-be54-f0fbefda46f3.png',
-      path: '/category/pants'
+      name: 'Scoop Neck/U-Neck',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377641/e326074c87457dfb085019eda5051c02_muyn7d.jpg',
+      path: '/category/scoop-neck'
     },
     {
       id: 6,
-      name: 'Sunglasses',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765461889/43753e06bc6de0fcff2745b62424bace_jzwtyc.jpg',
-      path: '/category/sunglasses'
+      name: 'Long Sleeve',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377863/3d6055a6e75a43c48cb44afbee99c1a4_p4rsmx.jpg',
+      path: '/category/long-sleeve'
     },
     {
       id: 7,
-      name: 'WATCHES',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270630/e84cc747-7a2e-4a65-ad85-0750fc16b74c.png',
-      path: '/category/watches'
+      name: 'Oversized',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377992/b86023dc4d82ff7be9c532b236321f06_iyul2v.jpg',
+      path: '/category/oversized'
     },
     {
       id: 8,
-      name: 'SHORTS & BOXERS',
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270714/557c7404-59a5-46d4-84a9-5fa505f2e7dc.png',
-      path: '/category/shorts'
+      name: 'Pocket Tee',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768378133/7ec5690e7a384368628b6d8e864f32e3_d1bnov.jpg',
+      path: '/category/pocket-tee'
     }
   ];
 

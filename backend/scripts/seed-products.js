@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/SANSKRUTEE';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/GULLY FASHION';
 
 async function seedProducts() {
   try {

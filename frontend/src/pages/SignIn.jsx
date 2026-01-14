@@ -138,7 +138,7 @@ const SignIn = () => {
           <div className="text-center">
             <Link to="/" className="inline-block mb-8">
               <h1 className="text-5xl font-serif font-bold text-black">
-                SANSKRUTEE
+                GULLY FASHION
               </h1>
             </Link>
             <p className="text-lg text-gray-600 max-w-sm mx-auto leading-relaxed">
@@ -154,7 +154,7 @@ const SignIn = () => {
             <div className="lg:hidden text-center mb-6">
               <Link to="/" className="inline-block mb-6">
                 <h1 className="text-2xl font-serif font-bold text-black">
-                  SANSKRUTEE
+                  GULLY FASHION
                 </h1>
               </Link>
             </div>
@@ -184,7 +184,7 @@ const SignIn = () => {
                   }}
                   className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                     loginMethod === 'email'
-                      ? 'bg-white text-rose-600 shadow-sm'
+                      ? 'bg-white text-blue-600 shadow-sm'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -201,7 +201,7 @@ const SignIn = () => {
                   }}
                   className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                     loginMethod === 'otp'
-                      ? 'bg-white text-rose-600 shadow-sm'
+                      ? 'bg-white text-blue-600 shadow-sm'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -226,7 +226,7 @@ const SignIn = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -242,7 +242,7 @@ const SignIn = () => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -251,13 +251,13 @@ const SignIn = () => {
                   <label className="flex items-center">
                     <input
                       type="checkbox"
-                      className="h-4 w-4 text-rose-500 focus:ring-rose-400 border-neutral-300 rounded"
+                      className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-neutral-300 rounded"
                     />
                     <span className="ml-2 text-sm text-gray-600">Remember me</span>
                   </label>
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-rose-500 hover:text-rose-600 transition-colors"
+                    className="text-sm text-blue-500 hover:text-blue-600 transition-colors"
                   >
                     Forgot password?
                   </Link>
@@ -266,7 +266,7 @@ const SignIn = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                 >
                   {loading ? 'Signing In...' : 'Sign In'}
                 </button>
@@ -298,7 +298,7 @@ const SignIn = () => {
                           onChange={handleOtpChange}
                           required
                           maxLength="10"
-                          className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                           placeholder="Enter 10-digit mobile number"
                         />
                         <p className="mt-1 text-xs text-gray-500">We'll send you a 6-digit OTP</p>
@@ -307,7 +307,7 @@ const SignIn = () => {
                       <button
                         type="submit"
                         disabled={sendingOTP}
-                        className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                        className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                       >
                         {sendingOTP ? 'Sending OTP...' : 'Send OTP'}
                       </button>
@@ -329,7 +329,7 @@ const SignIn = () => {
                             setError('');
                             setSuccess('');
                           }}
-                          className="mt-1 text-xs text-rose-500 hover:text-rose-600"
+                          className="mt-1 text-xs text-blue-500 hover:text-blue-600"
                         >
                           Change number
                         </button>
@@ -347,19 +347,19 @@ const SignIn = () => {
                           onChange={handleOtpChange}
                           required
                           maxLength="6"
-                          className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-center text-2xl tracking-widest"
+                          className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-center text-2xl tracking-widest"
                           placeholder="000000"
                         />
                         {otpTimer > 0 && (
                           <p className="mt-2 text-xs text-gray-500 text-center">
-                            OTP expires in: <span className="font-semibold text-rose-600">{formatTimer(otpTimer)}</span>
+                            OTP expires in: <span className="font-semibold text-blue-600">{formatTimer(otpTimer)}</span>
                           </p>
                         )}
                         {otpTimer === 0 && otpSent && (
                           <button
                             type="button"
                             onClick={handleSendOTP}
-                            className="mt-2 text-xs text-rose-500 hover:text-rose-600 font-medium"
+                            className="mt-2 text-xs text-blue-500 hover:text-blue-600 font-medium"
                           >
                             Resend OTP
                           </button>
@@ -369,7 +369,7 @@ const SignIn = () => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
+                        className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                       >
                         {loading ? 'Verifying...' : 'Verify & Login'}
                       </button>
@@ -384,7 +384,7 @@ const SignIn = () => {
                   Don't have an account?{' '}
                   <Link
                     to="/signup"
-                    className="text-rose-500 hover:text-rose-600 font-semibold transition-colors"
+                    className="text-blue-500 hover:text-blue-600 font-semibold transition-colors"
                   >
                     Sign up here
                   </Link>

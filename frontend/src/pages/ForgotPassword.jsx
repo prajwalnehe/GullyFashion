@@ -30,11 +30,11 @@ const ForgotPassword = () => {
       <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
         <div className="flex h-screen">
           {/* Left Side - Logo */}
-          <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100 items-center justify-center">
+          <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-100 via-blue-100 to-amber-100 items-center justify-center">
             <div className="text-center">
               <Link to="/" className="inline-block mb-8">
-                <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
-                  SANSKRUTEE
+                <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-blue-500 via-blue-500 to-amber-500 bg-clip-text text-transparent">
+                  GULLY FASHION
                 </h1>
               </Link>
               <p className="text-xl text-gray-600 max-w-md mx-auto leading-relaxed">
@@ -67,7 +67,7 @@ const ForgotPassword = () => {
                 )}
                 <Link
                   to="/signin"
-                  className="inline-block w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center"
+                  className="inline-block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center"
                 >
                   Back to Sign In
                 </Link>
@@ -75,7 +75,7 @@ const ForgotPassword = () => {
                   Didn't receive the email?{' '}
                   <button 
                     onClick={() => setIsSubmitted(false)}
-                    className="text-rose-500 hover:text-rose-600 font-medium"
+                    className="text-blue-500 hover:text-blue-600 font-medium"
                   >
                     Resend
                   </button>
@@ -92,10 +92,10 @@ const ForgotPassword = () => {
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
       <div className="flex h-screen">
         {/* Left Side - Logo */}
-        <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100 items-center justify-center">
+        <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-100 via-blue-100 to-amber-100 items-center justify-center">
           <div className="text-center">
             <Link to="/" className="inline-block mb-8">
-              <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+              <h1 className="text-6xl font-serif font-bold bg-gradient-to-r from-blue-500 via-blue-500 to-amber-500 bg-clip-text text-transparent">
                 PARIDHAAN
               </h1>
             </Link>
@@ -111,8 +111,8 @@ const ForgotPassword = () => {
             {/* Mobile Logo */}
             <div className="lg:hidden text-center mb-8">
               <Link to="/" className="inline-block mb-6">
-                <h1 className="text-3xl font-serif font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
-                  SANSKRUTEE
+                <h1 className="text-3xl font-serif font-bold bg-gradient-to-r from-blue-500 via-blue-500 to-amber-500 bg-clip-text text-transparent">
+                  GULLY FASHION
                 </h1>
               </Link>
             </div>
@@ -142,7 +142,7 @@ const ForgotPassword = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -150,7 +150,7 @@ const ForgotPassword = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-60"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-60"
                 >
                   {loading ? 'Sending...' : 'Send Reset Link'}
                 </button>
@@ -162,7 +162,7 @@ const ForgotPassword = () => {
                   Remember your password?{' '}
                   <Link
                     to="/signin"
-                    className="text-rose-500 hover:text-rose-600 font-semibold transition-colors"
+                    className="text-blue-500 hover:text-blue-600 font-semibold transition-colors"
                   >
                     Sign in here
                   </Link>

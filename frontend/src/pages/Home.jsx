@@ -70,52 +70,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* 2. Feature Blocks */}
-      <section className="hidden md:block py-8 lg:py-12 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {/* Free Shipping */}
-            <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Free Shipping Worldwide</h3>
-                <p className="text-sm text-gray-600">On orders above ₹999</p>
-              </div>
-            </div>
-            
-            {/* Secured Payment */}
-            <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Secured Online Payment</h3>
-                <p className="text-sm text-gray-600">100% secure transactions</p>
-              </div>
-            </div>
-            
-            {/* Money Back Guarantee */}
-            <div className="flex items-center gap-4 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Money Back Guarantee</h3>
-                <p className="text-sm text-gray-600">30 days return policy</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* Explore Our Collections - Circular Categories */}
       <section className="py-12 lg:py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,14 +81,14 @@ const Home = () => {
           <div className="md:flex md:flex-wrap md:justify-center overflow-x-auto md:overflow-x-visible -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
             <div className="flex md:flex-wrap md:justify-center items-start gap-6 lg:gap-8 min-w-max md:min-w-0">
               {[
-                { name: 'MEN', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270201/2bc21bba-d836-46f0-81a0-6e045d2b07fd.png' },
-                { name: 'WOMEN', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270065/f41cb7e3-f91a-4dc1-8738-35f610929e62.png' },
-                { name: 'BOYS', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270378/ce7c75f8-2069-4b99-be54-f0fbefda46f3.png' },
-                { name: 'GIRLS', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270630/e84cc747-7a2e-4a65-ad85-0750fc16b74c.png' },
-                { name: 'SISHU', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270714/557c7404-59a5-46d4-84a9-5fa505f2e7dc.png' },
-                { name: 'REGIONAL', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765270303/8ebb88f6-a40e-48a5-a1f3-6b98f254c666.png' },
-                { name: 'BANARASI', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765461889/43753e06bc6de0fcff2745b62424bace_jzwtyc.jpg' },
-                { name: 'DESIGNER SAREES', path: '/category/tshirts', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1765356722/c8ebeacb5152e0d91ea0158bc3d94f8b_uaalsc.jpg' }
+                { name: 'Crew Neck', path: '/category/crew-neck', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768376336/4e7aba40995ac5e9dc35daaf26b76220_lq6uip.jpg' },
+                { name: 'V Neck', path: '/category/v-neck', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768376888/15cca942-1f95-4406-bf62-d20c5dda6114.png' },
+                { name: 'Polo', path: '/category/polo', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377096/ed2ff93a-e0ee-4de3-aae3-03d0e5212693.png' },
+                { name: 'Henley', path: '/category/henley', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377277/822a1b4b1a5863b8d99a91bed9f67a38_qsgsdz.jpg' },
+                { name: 'Scoop Neck/U-Neck', path: '/category/scoop-neck', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377641/e326074c87457dfb085019eda5051c02_muyn7d.jpg' },
+                { name: 'Long Sleeve', path: '/category/long-sleeve', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377863/3d6055a6e75a43c48cb44afbee99c1a4_p4rsmx.jpg' },
+                { name: 'Oversized', path: '/category/oversized', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768377992/b86023dc4d82ff7be9c532b236321f06_iyul2v.jpg' },
+                { name: 'Pocket Tee', path: '/category/pocket-tee', image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768378133/7ec5690e7a384368628b6d8e864f32e3_d1bnov.jpg' }
               ].map((category, index) => (
                 <Link
                   key={index}
@@ -168,13 +122,12 @@ const Home = () => {
       {/* Main Content Area */}
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* 4. Best Deals of the Week */}
-        <section className="py-12 lg:py-16 bg-gray-50">
+        {/* 4. New Arrival */}
+        <section className="py-12 lg:py-16 bg-white">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Best Deals of the Week</h2>
-            <p className="text-gray-600">Don't miss out on these amazing offers</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">New Arrival</h2>
           </div>
-          <FeaturedProducts category="" layout="grid" /> 
+          <FeaturedProducts category="polo" layout="grid" />
         </section>
 
         {/* Banner Section 1 */}
@@ -203,21 +156,13 @@ const Home = () => {
           </div>
         </section>
 
-        {/* 5. Electronics Section */}
-        <section className="py-12 lg:py-16 bg-white">
+        {/* 5. Best Deals of the Week */}
+        <section className="py-12 lg:py-16 bg-gray-50">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Electronics</h2>
-            <p className="text-gray-600">Latest tech gadgets and accessories</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Best Deals of the Week</h2>
+            <p className="text-gray-600">Don't miss out on these amazing offers</p>
           </div>
-          <FeaturedProducts category="watches" layout="grid" /> 
-          <div className="flex justify-center mt-10">
-            <Link
-              to="/category/watches"
-              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-10 py-4 rounded-md font-semibold text-sm md:text-base uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
-            >
-              Shop Now →
-            </Link>
-          </div>
+          <FeaturedProducts category="" layout="grid" /> 
         </section>
 
         {/* Banner Section 3 - Big Sale */}

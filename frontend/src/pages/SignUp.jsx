@@ -56,7 +56,7 @@ const SignUp = () => {
           <div className="text-center">
             <Link to="/" className="inline-block mb-8">
               <h1 className="text-6xl font-serif font-bold text-black">
-                SANSKRUTEE
+                GULLY FASHION
               </h1>
             </Link>
             <p className="text-xl text-gray-600 max-w-md mx-auto leading-relaxed">
@@ -72,7 +72,7 @@ const SignUp = () => {
             <div className="lg:hidden text-center mb-8">
               <Link to="/" className="inline-block mb-6">
                 <h1 className="text-3xl font-serif font-bold text-black">
-                  SANSKRUTEE
+                  GULLY FASHION
                 </h1>
               </Link>
             </div>
@@ -104,7 +104,7 @@ const SignUp = () => {
                       value={formData.firstName}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                       placeholder="First name"
                     />
                   </div>
@@ -119,7 +119,7 @@ const SignUp = () => {
                       value={formData.lastName}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                       placeholder="Last name"
                     />
                   </div>
@@ -136,7 +136,7 @@ const SignUp = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -152,7 +152,7 @@ const SignUp = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                    className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                     placeholder="Enter your phone number"
                   />
                 </div>
@@ -169,7 +169,7 @@ const SignUp = () => {
                       value={formData.password}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                       placeholder="Create password"
                     />
                   </div>
@@ -184,7 +184,7 @@ const SignUp = () => {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all text-sm"
+                      className="w-full px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
                       placeholder="Confirm password"
                     />
                   </div>
@@ -198,15 +198,15 @@ const SignUp = () => {
                     checked={formData.agreeToTerms}
                     onChange={handleChange}
                     required
-                    className="h-4 w-4 text-rose-500 focus:ring-rose-400 border-neutral-300 rounded mt-0.5"
+                    className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-neutral-300 rounded mt-0.5"
                   />
                   <label htmlFor="agreeToTerms" className="ml-2 text-xs text-gray-600">
                     I agree to the{' '}
-                    <Link to="/terms" className="text-rose-500 hover:text-rose-600 transition-colors">
+                    <Link to="/terms" className="text-blue-500 hover:text-blue-600 transition-colors">
                       Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link to="/privacy" className="text-rose-500 hover:text-rose-600 transition-colors">
+                    <Link to="/privacy" className="text-blue-500 hover:text-blue-600 transition-colors">
                       Privacy Policy
                     </Link>
                   </label>
@@ -215,7 +215,7 @@ const SignUp = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-sm disabled:opacity-60"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-sm disabled:opacity-60"
                 >
                   {loading ? 'Creating...' : 'Create Account'}
                 </button>
@@ -227,7 +227,7 @@ const SignUp = () => {
                   Already have an account?{' '}
                   <Link
                     to="/signin"
-                    className="text-rose-500 hover:text-rose-600 font-semibold transition-colors"
+                    className="text-blue-500 hover:text-blue-600 font-semibold transition-colors"
                   >
                     Sign in here
                   </Link>

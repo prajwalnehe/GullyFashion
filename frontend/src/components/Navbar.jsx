@@ -237,65 +237,117 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {isCategoriesOpen && (
                 <div 
-                  className="absolute top-full left-0 mt-0 pt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-xl z-50 pb-3"
+                  className="absolute top-full left-0 mt-0 pt-4 w-[600px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 pb-4"
                 >
-                  <div className="grid grid-cols-4 gap-0">
+                  <div className="flex gap-6 px-4">
+                    {/* Left Section - Categories in Columns */}
+                    <div className="flex-1 grid grid-cols-2 gap-6">
+                      {/* Column 1 */}
+                      <div className="space-y-1">
                     <Link
-                      to="/category/formal-shirts"
+                          to="/category/crew-neck"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      SHIRTS
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Crew Neck</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/tshirts"
+                          to="/category/v-neck"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      TSHIRTS
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">V Neck</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/pants"
+                          to="/category/polo"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      PANTS
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Polo</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/shorts"
+                          to="/category/henley"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      SHORTS
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Henley</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                      
+                      {/* Column 2 */}
+                      <div className="space-y-1">
+                        <Link
+                          to="/category/scoop-neck"
+                          onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
+                        >
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Scoop Neck/U-Neck</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/shoes"
+                          to="/category/long-sleeve"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      Shoes
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Long Sleeve</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/sunglasses"
+                          to="/category/oversized"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      Sunglasses
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Oversized</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                     </Link>
                     <Link
-                      to="/category/watches"
+                          to="/category/pocket-tee"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded transition-colors group"
                     >
-                      WATCHES
-                    </Link>
+                          <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Pocket Tee</span>
+                          <svg className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                    
+                    {/* Right Section - Promotional Card */}
+                    <div className="w-48 border-l border-gray-200 pl-4">
+                      <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 h-full">
+                        <h3 className="text-sm font-semibold text-gray-900 mb-2">New Arrivals</h3>
+                        <p className="text-xs text-gray-600 mb-3">Discover our latest collection of premium t-shirts</p>
                     <Link
-                      to="/category/perfumes"
+                          to="/category/crew-neck"
                       onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
-                      className="block px-3 py-2 text-xs text-center text-gray-700 hover:bg-gray-100 hover:text-black transition-colors whitespace-nowrap"
-                    >
-                      PERFUMES
-                    </Link>
+                          className="text-xs font-medium text-gray-900 hover:text-black transition-colors inline-flex items-center gap-1"
+                        >
+                          Shop Now
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 // FaHeart is used for the favorite icon seen in the top right of the cards
-import { FaHeart, FaRegHeart, FaStar, FaChevronLeft, FaChevronRight, FaSpinner } from 'react-icons/fa'; 
+import { FaHeart, FaRegHeart, FaStar, FaChevronLeft, FaChevronRight, FaSpinner, FaShoppingCart, FaFire } from 'react-icons/fa'; 
 import { fetchSarees } from '../services/api';
 import { getCachedProducts, setCachedProducts } from '../utils/cache';
 
@@ -236,57 +236,96 @@ const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Grid Container - 2 rows, responsive columns */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
-            {products.map((product) => (
+            {products.map((product) => {
+              const productId = product._id || product.id;
+              const finalPrice = Math.round((product.price || product.mrp || 0) * (1 - (product.discountPercent || 0) / 100));
+              const originalPrice = product.mrp || product.price || 0;
+              const hasDiscount = product.discountPercent > 0;
+              const rating = 4.3; // Default rating, can be replaced with product.rating if available
+              
+              return (
               <div 
-                key={product._id || product.id} 
-                className="group bg-white overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                key={productId} 
+                className="group bg-white overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 onClick={() => {
-                  const productId = product._id || product.id;
                   if (productId) {
                     handleProductClick(productId);
                   }
                 }}
               >
                 {/* Image Container */}
-                <div className="relative pt-[130%]">
+                <div className="relative pt-[130%] rounded-t-lg overflow-hidden">
                   <img 
                     src={product.images?.image1 || product.image || 'https://via.placeholder.com/400x500?text=No+Image'} 
                     alt={product.title || product.name} 
                     className="absolute inset-0 w-full h-full object-cover" 
                   />
                   
-                  {/* Heart Icon (Top Right) */}
+                  {/* TRENDING Badge (Top Left) */}
+                  <div className="absolute top-1 left-1 sm:top-1.5 sm:left-1.5 md:top-2 md:left-2 bg-black text-white px-1 py-0.5 sm:px-1.5 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-semibold flex items-center gap-0.5 z-10">
+                    <FaFire className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
+                    <span className="leading-tight">TRENDING</span>
+                  </div>
+                  
+                  {/* Heart Icon (Top Right) - Keep as is */}
                   <button 
-                    onClick={(e) => toggleWishlist(product._id || product.id, e)}
-                    className="absolute top-2 right-2 md:top-3 md:right-3 bg-white rounded-full p-1 md:p-2 shadow-sm hover:shadow-md transition-all z-10"
+                    onClick={(e) => toggleWishlist(productId, e)}
+                    className="absolute top-2 right-2 md:top-3 md:right-3 bg-white rounded-full p-1.5 md:p-2 shadow-sm hover:shadow-md transition-all z-10 border border-gray-200"
                   >
-                    {wishlist.includes(product._id || product.id) ? (
+                    {wishlist.includes(productId) ? (
                       <FaHeart className="text-red-500 w-3 h-3 md:w-4 md:h-4" />
                     ) : (
                       <FaRegHeart className="text-gray-700 w-3 h-3 md:w-4 md:h-4" />
                     )}
                   </button>
+                  
+                  {/* Rating Badge (Bottom Left) */}
+                  <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded-full text-xs font-semibold text-gray-900 flex items-center gap-1 shadow-sm z-10">
+                    <FaStar className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                    <span>{rating}</span>
+                  </div>
+                  
+                  {/* Shopping Cart Icon (Bottom Right) */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Add to cart functionality can be added here
+                    }}
+                    className="absolute bottom-2 right-2 bg-black text-white rounded-full p-2 shadow-md hover:bg-gray-800 transition-all z-10"
+                  >
+                    <FaShoppingCart className="w-3 h-3 md:w-4 md:h-4" />
+                  </button>
                 </div>
                 
                 {/* Text Details */}
-                <div className="pt-2 pb-4 flex-1 flex flex-col text-left">
+                <div className="pt-2 pb-4 flex-1 flex flex-col text-left bg-white">
+                  {/* Product Title */}
                   <h3 className="text-sm font-semibold text-gray-800 leading-tight mb-1 truncate">
                     {product.title || product.name}
                   </h3>
-                  <div className="text-sm font-bold text-gray-900">
-                    ₹ {Math.round((product.price || product.mrp || 0) * (1 - (product.discountPercent || 0) / 100)).toLocaleString()}
+                  
+                  {/* Price with Discount */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-gray-900">
+                      ₹{finalPrice.toLocaleString()}
+                    </span>
+                    {hasDiscount && originalPrice > finalPrice && (
+                      <span className="text-xs text-gray-500 line-through">
+                        ₹{originalPrice.toLocaleString()}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
           
           {/* EXPLORE ALL LOOKS Button - Hidden for perfumes and shoes categories */}
           {category !== 'perfumes' && category !== 'Shoes' && category !== 'shoes' && (
           <div className="flex justify-center mt-8 mb-4">
             <Link
-              to="/"
-              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-semibold text-sm uppercase tracking-wide hover:bg-black-100 transition-all duration-300 transform hover:scale-105 shadow-lg border border-gray-300"
+              to="/category/crew-neck"
+              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-3 rounded-md font-semibold text-sm uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
             >
               EXPLORE ALL LOOKS
             </Link>
@@ -329,7 +368,7 @@ const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts 
             // Card: No shadow, white background, overflow hidden
             <div 
               key={product._id || product.id} 
-              className="product-card group bg-white overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300 flex-shrink-0 w-[280px] md:w-[300px]"
+              className="product-card group bg-white overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300 flex-shrink-0 w-[280px] md:w-[300px] rounded-lg"
               style={{ scrollSnapAlign: 'start' }}
               onClick={() => {
                 const productId = product._id || product.id;
@@ -340,7 +379,7 @@ const FeaturedProducts = ({ category = 'shirts', layout = 'scroll', maxProducts 
             >
               
               {/* Image Container */}
-              <div className="relative pt-[130%]">
+              <div className="relative pt-[130%] rounded-t-lg overflow-hidden">
                 <img 
                   src={product.images?.image1 || product.image || 'https://via.placeholder.com/400x500?text=No+Image'} 
                   alt={product.title || product.name} 

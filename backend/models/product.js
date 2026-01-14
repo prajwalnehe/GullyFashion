@@ -32,18 +32,6 @@ const productSchema = new mongoose.Schema(
 
       manufacturer: { type: String },
 
-      // -------- SHOES --------
-
-      availableSizes: { type: [String], default: [] },
-
-      shoeSize: { type: String },
-
-      shoeMaterial: { type: String },
-
-      shoeColor: { type: String },
-
-      shoeType: { type: String },
-
       // -------- TSHIRT --------
 
       tshirtSize: { type: String }, // S, M, L, XL, etc.
@@ -54,21 +42,9 @@ const productSchema = new mongoose.Schema(
 
       tshirtSleeve: { type: String }, // Half Sleeve, Full Sleeve
 
-      tshirtNeck: { type: String }, // Round, V-Neck, Polo
+      tshirtNeck: { type: String }, // Round, V Neck, Polo, Crew Neck, Henley, Scoop Neck
 
       tshirtColor: { type: String },
-
-      // -------- PANTS --------
-
-      pantWaist: { type: String }, // "30", "32", "34"
-
-      pantFit: { type: String }, // Slim, Regular, Relaxed
-
-      pantMaterial: { type: String }, // Denim, Cotton, Stretch Fabric
-
-      pantColor: { type: String },
-
-      pantType: { type: String }, // Jeans, Chinos, Joggers, Formal
 
       IncludedComponents: { type: String },
 

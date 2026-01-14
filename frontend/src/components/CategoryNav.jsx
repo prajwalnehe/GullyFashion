@@ -7,14 +7,14 @@ const CategoryNav = () => {
 
   const categories = [
     { name: 'All Categories', path: '/' },
-    { name: 'SHIRTS', path: '/category/formal-shirts' },
-    { name: 'TSHIRTS', path: '/category/tshirts' },
-    { name: 'PANTS', path: '/category/pants' },
-    { name: 'SHORTS', path: '/category/shorts' },
-    { name: 'Shoes', path: '/category/shoes' },
-    { name: 'Sunglasses', path: '/category/sunglasses' },
-    { name: 'WATCHES', path: '/category/watches' },
-    { name: 'PERFUMES', path: '/category/perfumes' },
+    { name: 'Crew Neck', path: '/category/crew-neck' },
+    { name: 'V Neck', path: '/category/v-neck' },
+    { name: 'Polo', path: '/category/polo' },
+    { name: 'Henley', path: '/category/henley' },
+    { name: 'Scoop Neck/U-Neck', path: '/category/scoop-neck' },
+    { name: 'Long Sleeve', path: '/category/long-sleeve' },
+    { name: 'Oversized', path: '/category/oversized' },
+    { name: 'Pocket Tee', path: '/category/pocket-tee' },
   ];
 
   // Determine active category based on current path
