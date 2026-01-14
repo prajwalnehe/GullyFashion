@@ -123,7 +123,7 @@ const Home = () => {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 4. New Arrival */}
-        <section className="py-12 lg:py-16 bg-white">
+        <section id="new-arrival" className="py-12 lg:py-16 bg-white">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">New Arrival</h2>
           </div>

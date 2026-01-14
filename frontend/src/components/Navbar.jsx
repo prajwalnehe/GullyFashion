@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { searchProducts } from '../services/api';
 import { api } from '../utils/api';
@@ -16,6 +16,7 @@ const Navbar = () => {
   const searchWrapRefMobile = useRef(null);
   const searchWrapRefDesktop = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { cartCount } = useCart();
   const [wishlistCount, setWishlistCount] = useState(0);
   const [navbarLogo, setNavbarLogo] = useState('https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768217365/Black_White_Minimal_Initial_G_Letter_Logo_Design_dxdto9.png');
@@ -189,6 +190,28 @@ const Navbar = () => {
     });
   };
 
+  const scrollToNewArrival = () => {
+    setIsCategoriesOpen(false);
+    if (location.pathname === '/') {
+      // If already on home page, scroll to the section
+      setTimeout(() => {
+        const element = document.getElementById('new-arrival');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      // If not on home page, navigate first then scroll
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById('new-arrival');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  };
+
   return (
     <nav className="relative z-[70] bg-white border-b border-gray-200 border-t-0">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -336,16 +359,15 @@ const Navbar = () => {
                       <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 h-full">
                         <h3 className="text-sm font-semibold text-gray-900 mb-2">New Arrivals</h3>
                         <p className="text-xs text-gray-600 mb-3">Discover our latest collection of premium t-shirts</p>
-                    <Link
-                          to="/category/crew-neck"
-                      onClick={() => { setIsCategoriesOpen(false); scrollToTop(); }}
+                    <button
+                          onClick={scrollToNewArrival}
                           className="text-xs font-medium text-gray-900 hover:text-black transition-colors inline-flex items-center gap-1"
                         >
                           Shop Now
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

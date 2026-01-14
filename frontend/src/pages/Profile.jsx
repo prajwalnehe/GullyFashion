@@ -125,12 +125,20 @@ export default function Profile() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tab = params.get('tab');
-    if (tab && ['profile'].includes(tab)) {
+    if (tab && ['profile', 'orders', 'addresses'].includes(tab)) {
       setActiveSection(tab);
     } else {
       setActiveSection('profile');
     }
   }, [location.search]);
+
+  // Load orders when orders section is accessed
+  useEffect(() => {
+    if (activeSection === 'orders') {
+      refreshOrders();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSection]);
 
 
   const refreshOrders = async () => {
@@ -158,6 +166,9 @@ export default function Profile() {
   const handleSectionChange = (section) => {
     setActiveSection(section);
     setMobileMenuOpen(false);
+    // Update URL with tab parameter
+    const newUrl = section === 'profile' ? '/profile' : `/profile?tab=${section}`;
+    navigate(newUrl, { replace: true });
   };
 
   const formatDate = (dateString) => {
@@ -283,6 +294,28 @@ export default function Profile() {
                   )}
                 </button>
 
+                <button
+                  onClick={() => handleSectionChange('orders')}
+                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 relative mt-2 ${
+                    activeSection === 'orders'
+                      ? 'bg-gray-900 text-white shadow-md'
+                      : 'text-gray-700 hover:bg-gray-50 bg-white border border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div className={`p-2 rounded-lg ${activeSection === 'orders' ? 'bg-white/20' : 'bg-gray-100'}`}>
+                    <FiPackage className={`w-5 h-5 ${activeSection === 'orders' ? 'text-white' : 'text-gray-700'}`} />
+                  </div>
+                  <div className="flex-1 text-left">
+                    <div className="font-semibold">My Orders</div>
+                    <div className={`text-xs ${activeSection === 'orders' ? 'text-white/80' : 'text-gray-500'}`}>
+                      View order history
+                    </div>
+                  </div>
+                  {activeSection === 'orders' && (
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full"></div>
+                  )}
+                </button>
+
                 <Link to="/wishlist" className="block mt-2">
                   <div className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 text-gray-700 hover:bg-gray-50 bg-white border border-gray-200 hover:border-gray-300 relative">
                     <div className="p-2 rounded-lg bg-gray-100">
@@ -358,6 +391,16 @@ export default function Profile() {
                   }`}
                 >
                   Profile
+                </button>
+                <button
+                  onClick={() => handleSectionChange('orders')}
+                  className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                    activeSection === 'orders'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 bg-white'
+                  }`}
+                >
+                  My Orders
                 </button>
               </div>
             </div>
@@ -488,10 +531,13 @@ export default function Profile() {
                                     className="w-16 h-16 object-cover rounded-lg border border-gray-200" 
                                   />
                                   <div className="flex-1 min-w-0">
-                                    <div className="font-medium text-gray-900 truncate">{it.product?.title || 'Product'}</div>
-                                    <div className="text-sm text-gray-600">Quantity: {it.quantity} × ₹{Number(it.price || 0).toLocaleString('en-IN')}</div>
+                                    <div className="font-medium text-gray-900 truncate">{it.product?.title || it.product?.name || 'Product'}</div>
+                                    <div className="text-sm text-gray-600">
+                                      Quantity: {it.quantity || 1} × ₹{Number(it.price || it.product?.price || 0).toLocaleString('en-IN')}
+                                      {it.size && <span className="ml-2 text-gray-500">| Size: {it.size}</span>}
+                                    </div>
                                   </div>
-                                  <div className="font-semibold text-gray-900">₹{Number((it.price || 0) * (it.quantity || 1)).toLocaleString('en-IN')}</div>
+                                  <div className="font-semibold text-gray-900">₹{Number((it.price || it.product?.price || 0) * (it.quantity || 1)).toLocaleString('en-IN')}</div>
                                 </div>
                               ))}
                             </div>
