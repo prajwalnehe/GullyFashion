@@ -215,13 +215,13 @@ const Navbar = () => {
   return (
     <nav className="relative z-[70] bg-white border-b border-gray-200 border-t-0">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 gap-4">
+        <div className="flex items-center justify-between h-16 sm:h-14 md:h-16 gap-4">
           {/* Logo/Brand - Left */}
           <Link to="/" className="flex-shrink-0 z-10 flex items-center">
             <img 
               src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1768217365/Black_White_Minimal_Initial_G_Letter_Logo_Design_dxdto9.png"
               alt="MARTVILL Logo"
-              className="h-8 w-auto object-contain"
+              className="h-10 sm:h-8 w-auto object-contain"
             />
           </Link>
 
@@ -582,6 +582,66 @@ const Navbar = () => {
             id="mobile-menu" 
             className="lg:hidden py-4 sm:py-6 border-t border-gray-200 bg-white animate-in slide-in-from-top duration-200"
           >
+            {/* Contact Information Section */}
+            <div className="px-4 sm:px-6 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-200">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3 sm:mb-4">Contact Information</h3>
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <a href="tel:+12013828902" className="text-xs sm:text-sm text-gray-700 hover:text-black transition-colors">
+                    +12013828902
+                  </a>
+                </div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <a href="mailto:admin@techvill.net" className="text-xs sm:text-sm text-gray-700 hover:text-black transition-colors break-all">
+                    admin@techvill.net
+                  </a>
+                </div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p className="text-xs sm:text-sm text-gray-700">
+                    Address: 184 Main Rd E, St Albans, Australia
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links Section */}
+            <div className="px-4 sm:px-6 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-200">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3 sm:mb-4">Quick Links</h3>
+              <nav className="flex flex-col gap-2">
+                <Link
+                  to="/about"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    scrollToTop();
+                  }}
+                  className="text-xs sm:text-sm text-gray-700 hover:text-black hover:bg-gray-50 py-2 sm:py-2.5 px-3 sm:px-4 rounded transition-colors"
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/privacy"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    scrollToTop();
+                  }}
+                  className="text-xs sm:text-sm text-gray-700 hover:text-black hover:bg-gray-50 py-2 sm:py-2.5 px-3 sm:px-4 rounded transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </nav>
+            </div>
+
+            {/* Policy Links Section */}
             <nav className="flex flex-col gap-2 px-2">
               {policyLinks.map((link) => (
                 <Link
