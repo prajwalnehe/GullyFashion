@@ -482,7 +482,7 @@ const ProductDetail = () => {
                 <div className="mb-6 hidden sm:block">
                   <div className="flex gap-3">
                     <button 
-                      className="flex-1 bg-orange-500 text-white py-3 px-6 rounded-lg text-base font-medium hover:bg-orange-600 transition-colors disabled:opacity-70 flex items-center justify-center gap-2 shadow-md"
+                      className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-lg text-base font-medium transition-colors disabled:opacity-70 flex items-center justify-center gap-2 shadow-md"
                       onClick={handleAddToCart}
                       disabled={isAdding}
                     >
@@ -508,7 +508,7 @@ const ProductDetail = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-3 z-50 sm:hidden">
           <div className="flex gap-2 max-w-md mx-auto">
             <button 
-              className="flex-1 bg-orange-500 text-white py-2.5 rounded-lg font-medium hover:bg-orange-600 transition-colors disabled:opacity-70 text-sm flex items-center justify-center gap-2 shadow-md"
+              className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black py-2.5 rounded-lg font-medium transition-colors disabled:opacity-70 text-sm flex items-center justify-center gap-2 shadow-md"
               onClick={handleAddToCart}
               disabled={isAdding}
             >
