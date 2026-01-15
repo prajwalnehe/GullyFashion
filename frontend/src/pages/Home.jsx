@@ -123,8 +123,8 @@ const Home = () => {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 4. New Arrival */}
-        <section id="new-arrival" className="py-12 lg:py-16 bg-white">
-          <div className="text-center mb-10">
+        <section id="new-arrival" className="py-8 sm:py-12 lg:py-16 bg-white -mx-4 sm:mx-0 px-4 sm:px-0">
+          <div className="text-center mb-6 sm:mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">New Arrival</h2>
           </div>
           <FeaturedProducts category="polo" layout="grid" />
@@ -157,12 +157,12 @@ const Home = () => {
         </section>
 
         {/* 5. Best Deals of the Week */}
-        <section className="py-12 lg:py-16 bg-gray-50">
-          <div className="text-center mb-10">
+        <section className="py-8 sm:py-12 lg:py-16 bg-gray-50 -mx-4 sm:mx-0 px-4 sm:px-0">
+          <div className="text-center mb-6 sm:mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Best Deals of the Week</h2>
             <p className="text-gray-600">Don't miss out on these amazing offers</p>
           </div>
-          <FeaturedProducts category="" layout="grid" /> 
+          <FeaturedProducts category="" layout="grid" />
         </section>
 
         {/* Banner Section 3 - Big Sale */}
@@ -179,16 +179,16 @@ const Home = () => {
         </section>
 
         {/* 6. Fashion Section */}
-        <section className="py-12 lg:py-16 bg-gray-50">
-          <div className="text-center mb-10">
+        <section className="py-8 sm:py-12 lg:py-16 bg-gray-50 -mx-4 sm:mx-0 px-4 sm:px-0">
+          <div className="text-center mb-6 sm:mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Fashion</h2>
             <p className="text-gray-600">Trendy styles for every occasion</p>
           </div>
-          <FeaturedProducts category="oversized" layout="grid" /> 
-          <div className="flex justify-center mt-10">
+          <FeaturedProducts category="oversized" layout="grid" />
+          <div className="flex justify-center mt-6 sm:mt-10">
             <Link
               to="/category/oversized"
-              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-10 py-4 rounded-md font-semibold text-sm md:text-base uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
+              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-8 sm:px-10 py-3 sm:py-4 rounded-md font-semibold text-sm md:text-base uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
             >
               Shop Now →
             </Link>
